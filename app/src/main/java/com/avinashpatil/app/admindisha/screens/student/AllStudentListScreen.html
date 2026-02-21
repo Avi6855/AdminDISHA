@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>All Students - Immersive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                        sans: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        '2xl': '1.5rem',
+                    },
+                },
+            },
+        };
+    </script>
+<style type="text/tailwindcss">
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light font-sans min-h-screen text-slate-900 antialiased overflow-x-hidden">
+<div class="fixed top-0 left-0 right-0 h-64 gradient-bg -z-10"></div>
+<main class="relative pb-24">
+<header class="pt-16 px-6 pb-6">
+<div class="flex justify-between items-center mb-6">
+<h1 class="text-4xl font-extrabold text-white tracking-tight">Students</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+<div class="glass rounded-2xl flex items-center px-4 py-3 shadow-xl shadow-indigo-500/10">
+<span class="material-symbols-outlined text-slate-500 mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full placeholder-slate-500 text-slate-800 font-medium" placeholder="Search students..." type="text"/>
+</div>
+</header>
+<div class="px-6 space-y-4">
+<div class="glass rounded-2xl p-6 shadow-sm border border-white/50">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="text-xl font-bold text-slate-800 leading-tight">Anirudha Rajendra Patil</h2>
+<p class="text-sm font-semibold text-primary mt-1">ID: DISHA-65345</p>
+</div>
+</div>
+<div class="flex items-center text-slate-500 text-sm mb-6">
+<span class="material-symbols-outlined text-sm mr-1">school</span>
+                    Course: CCC, Batch: JAVA-B001
+                </div>
+<div class="flex items-center justify-end space-x-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-green-100 text-green-600">
+<span class="material-symbols-outlined text-lg">lock_open</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-100 text-red-600">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<div class="glass rounded-2xl p-6 shadow-sm border border-white/50">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="text-xl font-bold text-slate-800 leading-tight">Ashish Ashok Patil</h2>
+<p class="text-sm font-semibold text-primary mt-1">ID: DISHA-73861</p>
+</div>
+</div>
+<div class="flex items-center text-slate-500 text-sm mb-6">
+<span class="material-symbols-outlined text-sm mr-1">school</span>
+                    Course: CCC, Batch: JAVA-B001
+                </div>
+<div class="flex items-center justify-end space-x-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-green-100 text-green-600">
+<span class="material-symbols-outlined text-lg">lock_open</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-100 text-red-600">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<div class="glass rounded-2xl p-6 shadow-sm border border-white/50">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="text-xl font-bold text-slate-800 leading-tight">Avinash Patil</h2>
+<p class="text-sm font-semibold text-primary mt-1">ID: DISHA-01877</p>
+</div>
+</div>
+<div class="flex items-center text-slate-400 text-sm mb-6 italic">
+<span class="material-symbols-outlined text-sm mr-1">info</span>
+                    No active enrollments
+                </div>
+<div class="flex items-center justify-end space-x-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-green-100 text-green-600">
+<span class="material-symbols-outlined text-lg">lock_open</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-100 text-red-600">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<button class="fixed bottom-8 right-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 shadow-xl shadow-pink-500/40 text-white flex items-center justify-center transform active:scale-95 transition-transform duration-100 z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+
+</body></html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Topics - Light Glass Edition</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#3713ec",
+                "background-light": "#f6f6f8",
+                "background-dark": "#131022",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #3713ec;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #dbeafe 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .glow-blob {
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        .fab-gradient {
+            background: linear-gradient(45deg, #ff3d77, #ff914d);
+            box-shadow: 0 10px 25px rgba(255, 61, 119, 0.3);
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light font-display antialiased">
+<div class="glow-blob bg-purple-300 w-64 h-64 -top-20 -left-20"></div>
+<div class="glow-blob bg-blue-300 w-80 h-80 top-1/2 -right-20"></div>
+<div class="glow-blob bg-cyan-200 w-72 h-72 bottom-0 left-1/4"></div>
+<div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-transparent">
+<header class="sticky top-0 z-50 glass-nav px-6 pt-12 pb-6 flex items-center justify-between">
+<button class="flex items-center justify-center size-10 rounded-full bg-white/40 border border-white/60">
+<span class="material-symbols-outlined text-primary text-[24px]">chevron_left</span>
+</button>
+<h2 class="text-slate-800 text-lg font-bold tracking-tight">Topics</h2>
+<div class="size-10"></div> 
+</header>
+<main class="flex flex-col gap-4 px-6 pb-32 pt-8">
+<div class="glass-card flex items-center gap-4 p-5 rounded-xl border border-white/60">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined text-[28px]">memory</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-900 text-lg font-bold">Artificial Intelligence</p>
+</div>
+<div class="flex gap-1">
+<button class="text-slate-400 hover:text-primary transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="glass-card flex items-center gap-4 p-5 rounded-xl border border-white/60">
+<div class="flex items-center justify-center rounded-lg bg-blue-100 text-blue-600 shrink-0 size-12">
+<span class="material-symbols-outlined text-[28px]">flare</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-900 text-lg font-bold">Quantum Computing</p>
+</div>
+<div class="flex gap-1">
+<button class="text-slate-400 hover:text-primary transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="glass-card flex items-center gap-4 p-5 rounded-xl border border-white/60">
+<div class="flex items-center justify-center rounded-lg bg-teal-100 text-teal-600 shrink-0 size-12">
+<span class="material-symbols-outlined text-[28px]">genetics</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-900 text-lg font-bold">Bio-Engineering</p>
+</div>
+<div class="flex gap-1">
+<button class="text-slate-400 hover:text-primary transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="glass-card flex items-center gap-4 p-5 rounded-xl border border-white/60">
+<div class="flex items-center justify-center rounded-lg bg-orange-100 text-orange-600 shrink-0 size-12">
+<span class="material-symbols-outlined text-[28px]">rocket_launch</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-900 text-lg font-bold">Space Exploration</p>
+</div>
+<div class="flex gap-1">
+<button class="text-slate-400 hover:text-primary transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="glass-card flex items-center gap-4 p-5 rounded-xl border border-white/60">
+<div class="flex items-center justify-center rounded-lg bg-purple-100 text-purple-600 shrink-0 size-12">
+<span class="material-symbols-outlined text-[28px]">brush</span>
+</div>
+<div class="flex-1">
+<p class="text-slate-900 text-lg font-bold">Generative Art</p>
+</div>
+<div class="flex gap-1">
+<button class="text-slate-400 hover:text-primary transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors size-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</main>
+<button class="fixed bottom-10 right-8 size-16 rounded-full fab-gradient flex items-center justify-center text-white z-[60]">
+<span class="material-symbols-outlined text-[32px] font-bold">add</span>
+</button>
+<div class="fixed bottom-0 left-0 right-0 h-8 pointer-events-none"></div>
+</div>
+<div class="sr-only">
+<img alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmmPu6TqbMeYz-ZJvSs1uN5NE87nET14imOo9PkjH8mVquy3dmUNZRFHJvtgAbPjH2GzUcDEUtF5YD9xOuZmBFKfyLXgmsH84NrMkR-H1RKUXK367mEvO4qPpuH65QwJBVSFeI4emR9y9p4vQIGeXx3om0OS1lUgoTb41omg8CE807BzEOHn-JPrdEXLfTcb9K4Jo4GIN6rj4AzwIVaFbC8P6bqgrR6B9WMGS6nOop6ahS4oSdUI09PfVA7tD9GLhoBukKAOQ5pP4"/>
+</div>
+
+</body></html>
