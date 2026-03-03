@@ -3,15 +3,15 @@ package com.avinashpatil.app.admindisha.screens.login
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.avinashpatil.app.admindisha.api.ApiService
-import com.avinashpatil.app.admindisha.api.LoginRequest
-import com.avinashpatil.app.admindisha.api.LoginResponse
+import com.avinashpatil.app.admindisha.data.repository.AuthRepository
 import com.avinashpatil.app.admindisha.data.store.TokenManager
 import com.avinashpatil.app.admindisha.data.store.UserPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.net.SocketTimeoutException
 import java.time.Instant
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ sealed class LoginState {
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val apiService: ApiService,
+    private val authRepository: AuthRepository,
     private val userPreferences: UserPreferences,
     private val tokenManager: TokenManager
 ) : ViewModel() {
@@ -45,13 +45,11 @@ class LoginViewModel @Inject constructor(
             try {
                 _loginState.value = LoginState.Loading
 
-                val loginRequest = LoginRequest(
+                val response = authRepository.login(
                     email = email,
                     dishaId = dishaId,
                     deviceName = deviceName.value
                 )
-
-                val response = apiService.login(loginRequest)
 
                 when (response.code()) {
                     200 -> {
@@ -120,7 +118,12 @@ class LoginViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 android.util.Log.e("LoginViewModel", "Login Exception: ${e.message}")
-                _loginState.value = LoginState.Error("Network error: ${e.message}")
+                val userMessage = when (e) {
+                    is SocketTimeoutException -> "Connection timed out. Please check your internet and try again."
+                    is IOException -> "Unable to reach the server. Please check your internet connection or try again later."
+                    else -> "An unexpected error occurred: ${e.message}"
+                }
+                _loginState.value = LoginState.Error(userMessage)
             }
         }
     }

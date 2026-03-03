@@ -95,7 +95,6 @@ object NetworkModule {
         authInterceptor: AuthInterceptor,
         refreshTokenAuthenticator: RefreshTokenAuthenticator
     ): OkHttpClient {
-        // Create a dispatcher with custom settings to avoid resource exhaustion
         val dispatcher = Dispatcher().apply {
             maxRequests = 20      // Default is 64, reduce to avoid overwhelming
             maxRequestsPerHost = 5 // Default is 5, keep as is
@@ -107,53 +106,29 @@ object NetworkModule {
             .addInterceptor(authInterceptor)
             .addInterceptor { chain ->
                 val request = chain.request()
-                var retryCount = 0
                 val maxRetries = 3
-                val retryDelay = 1000L // 1 second
+                val retryDelay = 1000L
+                var attempt = 0
+                var lastException: IOException? = null
 
-                while (retryCount < maxRetries) {
-                    var response: Response? = null
+                while (attempt <= maxRetries) {
                     try {
-                        // Create a new request for each retry to avoid closed buffer issues
-                        val newRequest = if (retryCount > 0) request.newBuilder().build() else request
-                        response = chain.proceed(newRequest)
-                        
-                        // If response is successful or not a server error, return it
-                        if (response.isSuccessful || response.code < 500) {
-                            return@addInterceptor response
-                        }
-                        
-                        android.util.Log.w("NetworkRetry", "Server error ${response.code}, retrying (${retryCount + 1}/$maxRetries)")
-                        
-                        // Safely close the response before retrying
-                        try {
-                            response.close()
-                        } catch (e: Exception) {
-                            android.util.Log.w("NetworkRetry", "Error closing response: ${e.message}")
-                        }
-                        response = null
-                        
-                        Thread.sleep(retryDelay)
-                        retryCount++
-                        
+                        return@addInterceptor chain.proceed(request)
                     } catch (e: IOException) {
-                        android.util.Log.w("NetworkRetry", "IO Exception: ${e.message}, retrying (${retryCount + 1}/$maxRetries)")
-                        
-                        // Safely close any response before retrying
-                        try {
-                            response?.close()
-                        } catch (closeEx: Exception) {
-                            android.util.Log.w("NetworkRetry", "Error closing response: ${closeEx.message}")
+                        lastException = e
+                        android.util.Log.w(
+                            "NetworkRetry",
+                            "Network error on attempt ${attempt + 1}/$maxRetries: ${e.message}"
+                        )
+                        if (attempt == maxRetries) {
+                            throw lastException ?: e
                         }
-                        response = null
-                        
                         Thread.sleep(retryDelay)
-                        retryCount++
+                        attempt++
                     }
                 }
-                
-                // If we got here, all retries failed
-                throw IOException("All retries failed after $maxRetries attempts")
+
+                throw lastException ?: IOException("Network request failed")
             }
             .authenticator(refreshTokenAuthenticator)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)

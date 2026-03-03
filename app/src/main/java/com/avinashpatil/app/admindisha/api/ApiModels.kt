@@ -1,6 +1,7 @@
 package com.avinashpatil.app.admindisha.api
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
@@ -230,6 +231,9 @@ data class QuizResult(
 data class LoginRequest(
     val email: String,
     val dishaId: String,
+    @SerializedName("remember-me")
+    val rememberMe: Boolean = true,
+    @SerializedName("deviceName")
     val deviceName: String
 ) : Parcelable
 
