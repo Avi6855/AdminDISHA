@@ -3,7 +3,7 @@
 ![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin&logoColor=white)
 ![Compose](https://img.shields.io/badge/Jetpack_Compose-Material_3-4285F4?logo=android&logoColor=white)
 ![Hilt](https://img.shields.io/badge/Dagger_Hilt-009688?logo=dagger&logoColor=white)
-![Retrofit](https://img.shields.io/badge/Retrofit-53_endpoints-3DDC84?logo=android&logoColor=white)
+![Retrofit](https://img.shields.io/badge/Retrofit-54_endpoints-3DDC84?logo=android&logoColor=white)
 ![Room](https://img.shields.io/badge/Room-Cache-FF6F00?logo=sqlite&logoColor=white)
 ![CameraX](https://img.shields.io/badge/CameraX-1.3.2-3DDC84?logo=android&logoColor=white)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
@@ -24,14 +24,14 @@ institute IDs — against the same REST backend that serves the published studen
 |---|---|
 | Kotlin + Jetpack Compose, Material 3 | 26 Compose screen files in `screens/` (~10k lines) |
 | Coroutines & Flow, MVVM | 11 `@HiltViewModel` classes (~2.2k lines) exposing `StateFlow` UI state |
-| Hilt + Retrofit + Room | `di/NetworkModule.kt`, `di/DatabaseModule.kt`, `di/DataStoreModule.kt`, **53 REST endpoints** |
+| Hilt + Retrofit + Room | `di/NetworkModule.kt`, `di/DatabaseModule.kt`, `di/DataStoreModule.kt`, **54 REST endpoints** |
 | Admin auth | Email + **DISHA ID** + registered **device name** (`Build.MODEL`), JWT access token + `RefreshTokenAuthenticator` |
 | Full back-office CRUD | Students (+ enrollment & payments), courses, topics, batches — create / edit / delete |
 | Attendance & certificates | Date-wise attendance marking per batch; one-tap **"Send Certificates"** to a whole course |
 | Real product | Version 1.0.0 · minSdk 29 · compileSdk/targetSdk 36 · runs the live institute |
 | Testing mindset (TDD) | 25 JVM unit tests in `app/src/test/` — `./gradlew :app:testDebugUnitTest` |
 
-**Scale:** 75 Kotlin files · ~15.6k lines · 26 Compose screen files · 53 API endpoints · 11 Hilt ViewModels · 2 repositories.
+**Scale:** 73 Kotlin files · ~15.6k lines · 26 Compose screen files · 54 API endpoints · 11 Hilt ViewModels · 2 repositories.
 
 ## ✨ Features
 
@@ -96,7 +96,7 @@ Compose screen (screens/)
 
 ```
 app/src/main/java/com/avinashpatil/app/admindisha/
-├── api/            # Retrofit services, DTOs, interceptors (53 endpoints)
+├── api/            # Retrofit services, DTOs, interceptors (54 endpoints)
 ├── data/           # Room (AppDatabase v3, DAOs, entities), repositories, DataStore
 ├── di/             # NetworkModule, DatabaseModule, DataStoreModule (Hilt)
 ├── navigation/     # AppNavigation routes + bottom navigation
@@ -127,9 +127,9 @@ app/src/main/java/com/avinashpatil/app/admindisha/
 | Suite | What it pins down |
 |---|---|
 | `PaymentDataHandlerTest` (10) | The paid-amount resolution chain (payment history → enrollment → course price → summary → default) and its fallbacks |
-| `PaymentModelsTest` (6) | Payment DTO totals: paid / pending / overpaid amounts and status mapping |
-| `StepUpFormValidationTest` (4) | The 3-step student onboarding validation rules |
-| `ConvertersTest` (5) | Room type converters for the local cache |
+| `PaymentModelsTest` (6) | Payment DTO formatting and validity, and the payment-summary totals including the empty case |
+| `StepUpFormValidationTest` (4) | Step-1 institute email validation, including the documented double-`@` limitation |
+| `ConvertersTest` (5) | Batch, user and string list round trips through the Room converters, plus ISO date/time handling |
 
 ```bash
 ./gradlew :app:testDebugUnitTest
