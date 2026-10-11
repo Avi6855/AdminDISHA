@@ -7,6 +7,7 @@
 ![Room](https://img.shields.io/badge/Room-Cache-FF6F00?logo=sqlite&logoColor=white)
 ![CameraX](https://img.shields.io/badge/CameraX-1.3.2-3DDC84?logo=android&logoColor=white)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Tests](https://img.shields.io/badge/Unit_Tests-25_passing-brightgreen?logo=junit5&logoColor=white)
 
 The **admin side of the DISHA Computer Education platform**. This console runs the institute's day-to-day
 operations — students, courses, topics, batches, attendance, fees/payments, exams, certificates and
@@ -28,6 +29,7 @@ institute IDs — against the same REST backend that serves the published studen
 | Full back-office CRUD | Students (+ enrollment & payments), courses, topics, batches — create / edit / delete |
 | Attendance & certificates | Date-wise attendance marking per batch; one-tap **"Send Certificates"** to a whole course |
 | Real product | Version 1.0.0 · minSdk 29 · compileSdk/targetSdk 36 · runs the live institute |
+| Testing mindset (TDD) | 25 JVM unit tests in `app/src/test/` — `./gradlew :app:testDebugUnitTest` |
 
 **Scale:** 75 Kotlin files · ~15.6k lines · 26 Compose screen files · 53 API endpoints · 11 Hilt ViewModels · 2 repositories.
 
@@ -118,6 +120,21 @@ app/src/main/java/com/avinashpatil/app/admindisha/
 | Exams & results | `GET api/quizzes/courses/{courseId}`, `DELETE api/quizzes/{quizId}`, `POST api/quiz/submit`, `GET api/exam/result/{examId}`, `GET api/users/{userId}/statistics` |
 | Certificates & ranking | `POST api/certificates/courses/{courseId}`, `GET api/leaderboard` |
 
+## 🧪 Tests
+
+25 JVM unit tests cover the console's pure logic, so no emulator is needed:
+
+| Suite | What it pins down |
+|---|---|
+| `PaymentDataHandlerTest` (10) | The paid-amount resolution chain (payment history → enrollment → course price → summary → default) and its fallbacks |
+| `PaymentModelsTest` (6) | Payment DTO totals: paid / pending / overpaid amounts and status mapping |
+| `StepUpFormValidationTest` (4) | The 3-step student onboarding validation rules |
+| `ConvertersTest` (5) | Room type converters for the local cache |
+
+```bash
+./gradlew :app:testDebugUnitTest
+```
+
 ## 🚀 Build & run
 
 Requirements: **Android Studio (latest)**, **JDK 11**, Android SDK with **compileSdk 36**, a device/emulator on **API 29+**.
@@ -125,7 +142,8 @@ Requirements: **Android Studio (latest)**, **JDK 11**, Android SDK with **compil
 ```bash
 git clone https://github.com/Avi6855/AdminDISHA.git
 cd AdminDISHA
-./gradlew :app:assembleDebug
+./gradlew :app:assembleDebug   # build the debug APK
+./gradlew :app:testDebugUnitTest   # run the 25 unit tests
 ```
 
 Notes:
@@ -153,7 +171,8 @@ Notes:
   with `println`; move to a `BuildConfig.DEBUG`-guarded logger before release builds.
 - **Repository/agent folders are tracked** — `.vscode/`, `.starFactory/`, `.zhanlu/` and the stray
   `APK FILE/admindisha` artifact are committed and could be removed/gitignored.
-- **Tests are still the generated templates** (`ExampleUnitTest`, `ExampleInstrumentedTest`).
+- **Instrumented tests are still the generated template** — `ExampleInstrumentedTest` is a placeholder; the
+  attendance and certificate flows have no UI test yet.
 
 ## 👤 Author
 
